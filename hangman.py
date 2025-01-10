@@ -8,26 +8,31 @@ def start():
     global alphabet
     gametypechooser = Tk()
     guessed_letters = []
-    available_letters = ["A","B","C","D","E","F","_","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","Y","Z"]
-    alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","Y","Z"]
+    available_letters = ["A","B","C","D","E","F","_","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     lives_taken = 0
     Label(gametypechooser,text = "Do you want to play against a friend or the computer?").pack()
     Button(gametypechooser,text = "Player vs Player", command=lambda:player_update_board()).pack()
-    Button(gametypechooser,text = "Player vs Computer", command=lambda:computer_update_board()).pack()
+    Button(gametypechooser,text = "Player vs Computer", command=lambda:computer_update_board(0)).pack()
     gametypechooser.mainloop()
 
-
-def update_board():
-    global wordlength
-    root = Tk()
-    root.minsize(400,400)
-    root.wm_title("Hangman")
-    for n in range(0,wordlength):
-        Label(root,text = "______").place(x= (20 * n) + 20 ,y=200)
+def comporplayerguesserfunction():
+    comporplayerguesserwindow = Tk()
+    Button(comporplayerguesserwindow,text = "Player",command = lambda:computer_update_board(0))
 
 
 
-    root.mainloop()
+#def update_board():
+    #global wordlength
+    #root = Tk()
+    #root.minsize(400,400)
+    #root.wm_title("Hangman")
+    #for n in range(0,wordlength):
+        #Label(root,text = "______").place(x= (20 * n) + 20 ,y=200)
+
+
+
+    #root.mainloop()
     
 def player_update_board():
     playergame = Tk()
@@ -38,9 +43,11 @@ def player_update_board():
     
     playergame.mainloop()
 
-def computer_update_board():
+def computer_update_board(playertype):
     global available_letters
     global alphabet
+    global wordlength
+    wordlength = 9
     computergame = Tk()
     computergame.wm_title("Hangman")
     computergame.minsize(400,400)
@@ -51,7 +58,14 @@ def computer_update_board():
             labels.config(fg="red")
             labels.grid(row = 10, column = n, pady = 5)
         else:
-            Button(computergame, text = available_letters[n],font = ("Impact 17",25),command=lambda:computer_main(n),width = 1, height = 1).grid(row = 10, column = n, pady = 5)    #row needs to be changed to another number based on the number of things going above the letter buttons/labels
+            Button(computergame, text = available_letters[n],font = ("Impact 17",25),command=lambda:computer_main(n),width = 2, height = 1).grid(row = 10, column = n, pady = 5)    #row needs to be changed to another number based on the number of things going above the letter buttons/labels
+    for n in range(0,wordlength):
+        Label(computergame,text = "______").grid(row = 7,column = n+100, pady = 5)
+
+
+    #WINSTON PUT IMAGE UPDATES IN HERE
+    #use the "lives_taken" variable to see how many images are neededto display
+
     computergame.mainloop()
     
 def player_main():

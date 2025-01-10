@@ -6,19 +6,24 @@ def start():
     global guessed_letters
     global lives_taken
     global alphabet
+    global turn
     gametypechooser = Tk()
     guessed_letters = []
     available_letters = ["A","B","C","D","E","F","_","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     lives_taken = 0
+    turn = 1
     Label(gametypechooser,text = "Do you want to play against a friend or the computer?").pack()
     Button(gametypechooser,text = "Player vs Player", command=lambda:player_update_board()).pack()
-    Button(gametypechooser,text = "Player vs Computer", command=lambda:computer_update_board(0)).pack()
+    Button(gametypechooser,text = "Player vs Computer", command=lambda:comporplayerguesserfunction()).pack()
     gametypechooser.mainloop()
 
 def comporplayerguesserfunction():
     comporplayerguesserwindow = Tk()
-    Button(comporplayerguesserwindow,text = "Player",command = lambda:computer_update_board(0))
+    Label(comporplayerguesserwindow,text = "Who is guessing the word?").pack()
+    Button(comporplayerguesserwindow,text = "Player",command = lambda:computer_update_board(0)).pack()
+    Button(comporplayerguesserwindow,text = "Computer",command = lambda:computer_update_board(1)).pack()
+    comporplayerguesserwindow.mainloop()
 
 
 
@@ -47,7 +52,11 @@ def computer_update_board(playertype):
     global available_letters
     global alphabet
     global wordlength
-    wordlength = 9
+    global turn
+    if playertype == 0 and turn == 1:
+        computer_word_generator()
+    elif playertype == 1 and turn == 1:
+        player_word_chooser()
     computergame = Tk()
     computergame.wm_title("Hangman")
     computergame.minsize(400,400)
@@ -72,8 +81,7 @@ def player_main():
     g = 3
     
 def computer_main(guess):
-    #Choose random word out of the list in the dictionary json file and store it to a variable called "chosen_word"
-    #if guess in chosen_word:
+    #if available_letters[guess] in chosen_word:
         #change button to green 
         #change letter to guessed letters list guessed_letters.append(guess)
         #change letter spot in origional list to "_" available_letters.remove(guess)
@@ -87,6 +95,13 @@ def show_hanged_man(x):
     g=1
     #put in here the code to show the image based on the number of lives taken
     
+
+def computer_word_generator():
+    #Choose random word out of the list in the dictionary json file and store it to a variable called "chosen_word"
+
+def player_word_chooser():
+    #textbox
+    #take the value from teh textbox and check it agaisnt the words in the json file
 
 
 start()

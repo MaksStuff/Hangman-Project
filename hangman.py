@@ -72,7 +72,21 @@ def computer_main(guess):
 def show_hanged_man(x):
     g=1
     #put in here the code to show the image based on the number of lives taken
+    Hanger = PhotoImage(file = "Hanger.png")
+    Hanger.grid(row = 5 column = 4)
+    Head = PhotoImage(file = "Head.png")
+
+    LefArm = PhotoImage(file = "Left Arm.png")
+
+    RightArm = PhotoImage(file = "Right Arm.png")
     
+    LeftLeg = PhotoImage(file = "Left Leg.png")
+
+    RightLeg = PhotoImage(file = "Right Leg.png")
+
+    Torso = PhotoImage(file = "Torso.png")
+
+    Noose = PhotoImage(file = "Noose.png")
 
 
 start()

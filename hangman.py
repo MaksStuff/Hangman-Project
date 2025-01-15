@@ -1,5 +1,7 @@
 from tkinter import *
 import time
+import json
+import random
 
 def start():
     global available_letters
@@ -98,11 +100,16 @@ def show_hanged_man(x):
 
 def computer_word_generator():
     #Choose random word out of the list in the dictionary json file and store it to a variable called "chosen_word"
+    data = json.load(open('words.json'))
+    words_list = list(data["words"].keys())
+    random_number = random.randint(0, len(words_list))#<-------------------------------------------------------------------------------------- need to fix
+    random_word = words_list[random_number]
+    print(random_word)
 
 def player_word_chooser():
     #textbox
     #take the value from teh textbox and check it agaisnt the words in the json file
-
+    g =2
 
 start()
 

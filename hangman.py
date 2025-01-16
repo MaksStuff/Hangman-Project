@@ -86,6 +86,24 @@ def computer_main(guess):
 def show_hanged_man(x):
     g=1
     #put in here the code to show the image based on the number of lives taken
+<<<<<<< HEAD
+=======
+    Hanger = PhotoImage(file = "Hanger.png")
+    Hanger.grid(row = 5 column = 4)
+    Head = PhotoImage(file = "Head.png")
+
+    LefArm = PhotoImage(file = "Left Arm.png")
+
+    RightArm = PhotoImage(file = "Right Arm.png")
+    
+    LeftLeg = PhotoImage(file = "Left Leg.png")
+
+    RightLeg = PhotoImage(file = "Right Leg.png")
+
+    Torso = PhotoImage(file = "Torso.png")
+
+    Noose = PhotoImage(file = "Noose.png")
+>>>>>>> e6e89aeb1b0d9279f6fd118be058ac4e0afabce7
 
 def computer_word_generator():
     global wordlength
@@ -124,8 +142,10 @@ def player_word_checker():
     global words_list
     global word_enterer
     word_in = word_enterer.get(1.0,"end-1c")
-    if word_in not in words_list:
+    if word_in.lower() not in words_list:
         player_word_chooser(1)
+    else:
+        
 
 start()
 

@@ -23,7 +23,7 @@ def start():
 def comporplayerguesserfunction():
     comporplayerguesserwindow = Tk()
     Label(comporplayerguesserwindow,text = "Who is guessing the word?").pack()
-    Button(comporplayerguesserwindow,text = "Player",command = lambda:player_word_chooser()).pack()
+    Button(comporplayerguesserwindow,text = "Player",command = lambda:player_word_chooser(0)).pack()
     Button(comporplayerguesserwindow,text = "Computer",command = lambda:computer_word_generator()).pack()
     comporplayerguesserwindow.mainloop()
     
@@ -90,6 +90,7 @@ def show_hanged_man(x):
 def computer_word_generator():
     global wordlength
     global random_word
+    global words_list
     data = json.load(open('words.json'))
     words_list = list(data["words"].keys())
     random_number = random.randint(0, len(words_list))
@@ -98,18 +99,33 @@ def computer_word_generator():
     wordlength = len(random_word)
     computer_update_board()
 
-def player_word_chooser():
-    wordchooser = Tk()
-    data = json.load(open('words.json'))
-    words_list = list(data["words"].keys())
-    Label(wordchooser, text = "Choose a word").pack()
-    Text(wordchooser).pack()
-    Button(wordchooser,text = "Submit word.").pack()
-    wordchooser.mainloop()
+def player_word_chooser(type):
+    global word_enterer
+    global words_list
+    if type == 0:
+        wordchooser = Tk()
+        data = json.load(open('words.json'))
+        words_list = list(data["words"].keys())
+        Label(wordchooser, text = "Choose a word").pack()
+        word_enterer = Text(wordchooser).pack()
+        Button(wordchooser,text = "Submit word.").pack()
+        wordchooser.mainloop()
+    elif type == 1:
+        wordchooser = Tk()
+        data = json.load(open('words.json'))
+        words_list = list(data["words"].keys())
+        Label(wordchooser, text = "Choose a different word").pack()
+        word_enterer = Text(wordchooser).pack()
+        Button(wordchooser,text = "Submit word.", command = lambda:player_word_checker()).pack()
+        wordchooser.mainloop()
+
 
 def player_word_checker():
-    
-
+    global words_list
+    global word_enterer
+    word_in = word_enterer.get(1.0,"end-1c")
+    if word_in not in words_list:
+        player_word_chooser(1)
 
 start()
 

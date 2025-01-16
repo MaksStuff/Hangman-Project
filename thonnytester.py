@@ -51,7 +51,6 @@ def computer_update_board():
             labels.config(fg="red")
             labels.grid(row = 10, column = n, pady = 5)
         else:
-            print(n)
             Button(computergame, text = available_letters[n],font = ("Impact 17",25),command=lambda:computer_main(n),width = 2, height = 1).grid(row = 10, column = n, pady = 5)    #row needs to be changed to another number based on the number of things going above the letter buttons/labels
     for n in range(0,wordlength):
         if random_word[n] in guessed_letters:
@@ -62,7 +61,6 @@ def computer_update_board():
 
 def computer_main(guess):
     global random_word
-    print(guess)
     if available_letters[guess] in random_word:
         available_letters[guess] == "_"
         guessed_letters.append(available_letters[guess])
@@ -104,15 +102,7 @@ def player_word_chooser():
     words_list = list(data["words"].keys())
     Label(wordchooser, text = "Choose a word").pack()
     Text(wordchooser).pack()
-    Button(wordchooser,text = "Submit word.").pack()
     wordchooser.mainloop()
-
-def player_word_checker():
-    
 
 
 start()
-
-#need to implement a computer guessing or player guessing choice place and the function for the random letter generation guess =  pick random(0,len(available_letters)) 
-
-##  git config --global user.email "19HAttryde@collegiate.org.uk"   git config --global user.name "attrydeh"

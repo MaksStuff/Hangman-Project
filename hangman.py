@@ -2,6 +2,9 @@ from tkinter import *
 import time
 import json
 import random
+import os
+from os import walk
+import tkinter as tk
 
 def start():
     global available_letters
@@ -41,7 +44,8 @@ def computer_update_board():
     global alphabet
     global wordlength
     global turn
-    computergame = Tk()
+    global computergame
+    computergame = Toplevel()
     computergame.wm_title("Hangman")
     computergame.minsize(400,400)
     show_hanged_man(lives_taken)
@@ -84,26 +88,83 @@ def computer_main(guess):
         j=3
 
 def show_hanged_man(x):
+    global images
+    global computergame
     g=1
     #put in here the code to show the image based on the number of lives taken
-<<<<<<< HEAD
-=======
-    Hanger = PhotoImage(file = "Hanger.png")
-    Hanger.grid(row = 5 column = 4)
-    Head = PhotoImage(file = "Head.png")
-
-    LefArm = PhotoImage(file = "Left Arm.png")
-
-    RightArm = PhotoImage(file = "Right Arm.png")
+    # image1 = Image.open("hangman images\Head.png")
+    # image1 = ImageTk.PhotoImage(image1)
+    # label1 = Label(image=image1)
+    # label1.pack()
+    images =[]
+    if x == 0:
+        HangIm = PhotoImage(file = "hangman images\Hanger.png") 
+        Hang = Label(computergame, image=HangIm)
+        Hang.place(x= 88, y =140)
+        images.append(HangIm)
     
-    LeftLeg = PhotoImage(file = "Left Leg.png")
+    if x == 1:
+        HeadIm = PhotoImage(file = "hangman images\Head.png") 
+        Head = Label(computergame, image=HeadIm)
+        Head.place(x= 297, y =220)
+        images.append(HeadIm)
 
-    RightLeg = PhotoImage(file = "Right Leg.png")
+    if x == 2:
+        TorsoIm = PhotoImage(file = "hangman images\Torso.png")
+        Torso = Label(computergame, image=TorsoIm)
+        Torso.place(x= 100, y =100)
+        images.append(TorsoIm)
 
-    Torso = PhotoImage(file = "Torso.png")
+    if x == 3:
+        LeftArmIm = PhotoImage(file = "hangman images\Left Arm.png")  
+        LeftArm = Label(computergame, image=TorsoIm)
+        LeftArm.place(x= 100, y =100)
+        images.append(LeftArmIm)
+    if x == 4:
+        RightArmIm = PhotoImage(file = "hangman images\Right Arm.png")
+        RightArm = Label(computergame, image=RightArmIm)
+        RightArm.place(x= 100, y =100)
+        images.append(RightArmIm)
+    
+    if x == 5:
+        LeftLegIm = PhotoImage(file = "hangman images\Left Leg.png")
+        LeftLeg = Label(computergame, image=LeftArmIm)
+        LeftLeg.place(x= 100, y =100)
+        images.append(LeftLegIm)
 
-    Noose = PhotoImage(file = "Noose.png")
->>>>>>> e6e89aeb1b0d9279f6fd118be058ac4e0afabce7
+    if x == 6:
+        RightLegIm = PhotoImage(file = "hangman images\Right Leg.png")
+        RightLeg = Label(computergame, image=RightArmIm)
+        RightLeg.place(x= 100, y =100)
+        images.append(RightLegIm)
+
+
+    if x == 7:
+        NooseIm = PhotoImage(file = "hangman images\\Noose.png")
+        Noose = Label(computergame, image=NooseIm)
+        Noose.place(x= 200, y =100)
+        images.append(NooseIm)
+
+
+
+
+    
+
+        
+
+    # Head = PhotoImage(file = "hangman images\Head.png")
+
+    # LefArm = PhotoImage(file = "Left Arm.png")
+
+    # RightArm = PhotoImage(file = "Right Arm.png")
+    
+    # LeftLeg = PhotoImage(file = "Left Leg.png")
+
+    # RightLeg = PhotoImage(file = "Right Leg.png")
+
+    # Torso = PhotoImage(file = "Torso.png")
+
+    # Noose = PhotoImage(file = "Noose.png")
 
 def computer_word_generator():
     global wordlength
@@ -145,7 +206,7 @@ def player_word_checker():
     if word_in.lower() not in words_list:
         player_word_chooser(1)
     else:
-        
+        computer_update_board()
 
 start()
 
